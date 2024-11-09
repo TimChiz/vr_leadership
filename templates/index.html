@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership Scenarios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .scenario-tile {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .scenario-tile h3 {
+            color: #333;
+        }
+        .scenario-tile a {
+            display: block;
+            color: #007BFF;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .scenario-tile a:hover {
+            text-decoration: underline;
+        }
+        #loadingSpinner {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Leadership Scenarios</h1>
+        <h2>Select a Scenario</h2>
+
+        <!-- Scenario List -->
+        <div class="scenario-grid" id="scenario-list"></div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner">Loading...</div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const scenarioList = document.getElementById('scenario-list');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            // Function to fetch scenarios from the backend
+            function fetchScenarios() {
+                loadingSpinner.style.display = 'block';  // Show loading spinner
+                fetch('/scenarios')
+                    .then(response => response.json())
+                    .then(data => {
+                        loadingSpinner.style.display = 'none';  // Hide loading spinner
+
+                        if (data.length === 0) {
+                            scenarioList.innerHTML = '<p>No scenarios available.</p>';
+                        } else {
+                            scenarioList.innerHTML = '';  // Clear any existing content
+                            data.forEach(scenario => {
+                                const scenarioTile = document.createElement('div');
+                                scenarioTile.className = 'scenario-tile';
+                                scenarioTile.innerHTML = `
+                                    <h3>${scenario.title}</h3>
+                                    <p>${scenario.setting}</p>
+                                `;
+                                
+                                // Create a link for each scenario that links to the detailed view
+                                const scenarioLink = document.createElement('a');
+                                scenarioLink.href = `/scenario/${scenario.id}`;
+                                scenarioLink.className = 'scenario-tile-link';
+                                scenarioLink.textContent = "View Scenario";
+                                scenarioTile.appendChild(scenarioLink);
+                                
+                                // Add the tile to the scenario list
+                                scenarioList.appendChild(scenarioTile);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching scenarios:', error);
+                        scenarioList.innerHTML = '<p>Error loading scenarios.</p>';
+                        loadingSpinner.style.display = 'none';
+                    });
+            }
+
+            // Initial fetch of scenarios
+            fetchScenarios();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ scenario.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .scenario-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .setting, .characters, .dialogue, .comment {
+            margin-bottom: 20px;
+        }
+
+        .characters ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .characters li {
+            margin: 5px 0;
+        }
+
+        .dialogue li {
+            margin: 10px 0;
+        }
+
+        .comment p {
+            font-style: italic;
+            color: #555;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scenario-container">
+        <h1>{{ scenario.title }}</h1>
+        <p><strong>Setting:</strong> {{ scenario.setting }}</p>
+
+        <div class="characters">
+            <h3>Characters:</h3>
+            <ul>
+                {% for character in scenario.characters %}
+                    <li>{{ character }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="dialogue">
+            <h3>Dialogue:</h3>
+            <ul>
+                {% for line in scenario.dialogue %}
+                    <li>{{ line }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="comment">
+            <h3>Comment:</h3>
+            <p>{{ scenario.comment }}</p>
+        </div>
+
+        <a href="/">Back to scenarios list</a>
+    </div>
+
+</body>
+</html>

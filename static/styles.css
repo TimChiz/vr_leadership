@@ -1,0 +1,113 @@
+/* Paste your CSS code here */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+
+.scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.scenario-tile {
+    background: #007bff;
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.emoji {
+    font-size: 0.5em; /* Adjust this value to your preference */
+    vertical-align: middle; /* Keeps emojis aligned with the text */
+    margin-right: 10px; /* Space between emoji and text */
+}
+
+.scenario-tile::before {
+    content: "🎭"; /* Default emoji */
+    font-size: 40px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scenario-tile:hover {
+    transform: scale(1.05);
+    background: #0056b3;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.scenario-tile:nth-child(1) {
+    background-color: #3498db; /* Blue */
+}
+
+.scenario-tile:nth-child(2) {
+    background-color: #e74c3c; /* Red */
+}
+
+.scenario-tile:nth-child(3) {
+    background-color: #2ecc71; /* Green */
+}
+
+.scenario-tile:nth-child(4) {
+    background-color: #f39c12; /* Yellow */
+}
+
+.scenario-tile:nth-child(5) {
+    background-color: #9b59b6; /* Purple */
+}
+
+.scenario-tile:nth-child(6) {
+    background-color: #16a085; /* Teal */
+}
+
+.scenario-tile:nth-child(7) {
+    background-color: #f1c40f; /* Gold */
+}
+
+.scenario-tile:nth-child(8) {
+    background-color: #34495e; /* Dark Gray */
+}
+
+.scenario-tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+#loadingSpinner {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    color: #007bff;
+}
+
+@media (max-width: 600px) {
+    .scenario-tile {
+        padding: 15px;
+    }
+}
